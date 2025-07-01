@@ -1,7 +1,7 @@
 
 const AboutSection = () => {
   return (
-    <section className="py-20 bg-cheerpoint-gray/10">
+    <section className="py-20 bg-gradient-to-br from-cheerpoint-lime/20 via-cheerpoint-lime/10 to-cheerpoint-gray/20">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-cheerpoint-navy mb-8">

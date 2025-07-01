@@ -1,12 +1,17 @@
 
 import { Button } from "@/components/ui/button";
-import { Share2, Users } from "lucide-react";
+import { Share2, Users, Link } from "lucide-react";
 
 interface ThanksSectionProps {
   onShareOnSocial: (platform: string) => void;
 }
 
 const ThanksSection = ({ onShareOnSocial }: ThanksSectionProps) => {
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(window.location.href);
+    // You could add a toast notification here if needed
+  };
+
   return (
     <>
       <section id="thanks" className="py-20 bg-cheerpoint-navy text-white">
@@ -26,28 +31,20 @@ const ThanksSection = ({ onShareOnSocial }: ThanksSectionProps) => {
               </h3>
               <div className="flex justify-center space-x-4">
                 <Button
-                  onClick={() => onShareOnSocial('twitter')}
-                  variant="outline"
-                  className="bg-white/10 border-white/20 text-white hover:bg-white/20"
-                >
-                  <Share2 className="mr-2 h-4 w-4" />
-                  Twitter
-                </Button>
-                <Button
-                  onClick={() => onShareOnSocial('facebook')}
-                  variant="outline"
-                  className="bg-white/10 border-white/20 text-white hover:bg-white/20"
-                >
-                  <Share2 className="mr-2 h-4 w-4" />
-                  Facebook
-                </Button>
-                <Button
                   onClick={() => onShareOnSocial('whatsapp')}
                   variant="outline"
                   className="bg-white/10 border-white/20 text-white hover:bg-white/20"
                 >
                   <Share2 className="mr-2 h-4 w-4" />
                   WhatsApp
+                </Button>
+                <Button
+                  onClick={copyToClipboard}
+                  variant="outline"
+                  className="bg-white/10 border-white/20 text-white hover:bg-white/20"
+                >
+                  <Link className="mr-2 h-4 w-4" />
+                  Copiar enlace
                 </Button>
               </div>
             </div>
