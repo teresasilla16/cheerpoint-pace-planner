@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -21,6 +20,9 @@ const Index = () => {
   const [calculations, setCalculations] = useState<PaceCalculation[]>([]);
   const [showResults, setShowResults] = useState(false);
   const [email, setEmail] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [raceName, setRaceName] = useState("");
   const [participationType, setParticipationType] = useState("");
 
   const scrollToCalculator = () => {
@@ -82,7 +84,7 @@ const Index = () => {
   };
 
   const handleDownloadPDF = () => {
-    if (!email || !participationType) {
+    if (!email || !firstName || !lastName || !raceName || !participationType) {
       toast({
         title: "Error",
         description: "Por favor completa todos los campos",
@@ -134,7 +136,7 @@ const Index = () => {
             <span className="text-cheerpoint-lime">por el 21?</span>
           </h1>
           <p className="text-xl md:text-2xl text-white/90 mb-12 max-w-3xl mx-auto leading-relaxed">
-            Calcula tu hora estimada de paso por cada kilómetro y comparte el plan con tu gente.
+            Calcula tu hora estimada de paso por cada kilómetro y comparte el plan con los tuyos. Correr es emocionante. Animar, también. Porque saber cuándo llega no le quita emoción. Le da sentido. Y porque estar ahí, justo ahí, también es parte de la carrera.
           </p>
           <Button 
             onClick={scrollToCalculator}
@@ -284,6 +286,35 @@ const Index = () => {
                   </p>
                 </CardHeader>
                 <CardContent className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <Label htmlFor="firstName" className="text-cheerpoint-navy font-semibold">
+                        Nombre
+                      </Label>
+                      <Input
+                        id="firstName"
+                        type="text"
+                        placeholder="Tu nombre"
+                        value={firstName}
+                        onChange={(e) => setFirstName(e.target.value)}
+                        className="border-cheerpoint-gray focus:border-cheerpoint-lime"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="lastName" className="text-cheerpoint-navy font-semibold">
+                        Apellidos
+                      </Label>
+                      <Input
+                        id="lastName"
+                        type="text"
+                        placeholder="Tus apellidos"
+                        value={lastName}
+                        onChange={(e) => setLastName(e.target.value)}
+                        className="border-cheerpoint-gray focus:border-cheerpoint-lime"
+                      />
+                    </div>
+                  </div>
+
                   <div className="space-y-2">
                     <Label htmlFor="email" className="text-cheerpoint-navy font-semibold">
                       Email
@@ -294,6 +325,20 @@ const Index = () => {
                       placeholder="tu@email.com"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
+                      className="border-cheerpoint-gray focus:border-cheerpoint-lime"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="raceName" className="text-cheerpoint-navy font-semibold">
+                      Carrera a la que asistes
+                    </Label>
+                    <Input
+                      id="raceName"
+                      type="text"
+                      placeholder="Nombre de la carrera"
+                      value={raceName}
+                      onChange={(e) => setRaceName(e.target.value)}
                       className="border-cheerpoint-gray focus:border-cheerpoint-lime"
                     />
                   </div>
