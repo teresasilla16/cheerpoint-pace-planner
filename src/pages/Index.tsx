@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { toast } from "@/hooks/use-toast";
 import HeroSection from "@/components/HeroSection";
@@ -6,6 +5,7 @@ import CalculatorSection from "@/components/CalculatorSection";
 import ResultsSection from "@/components/ResultsSection";
 import DownloadFormSection from "@/components/DownloadFormSection";
 import ThanksSection from "@/components/ThanksSection";
+import AboutSection from "@/components/AboutSection";
 
 interface PaceCalculation {
   km: number;
@@ -161,6 +161,8 @@ const Index = () => {
       />
 
       <ThanksSection onShareOnSocial={shareOnSocial} />
+      
+      <AboutSection />
     </div>
   );
 };
