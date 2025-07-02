@@ -2,7 +2,6 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Calculator, Clock } from "lucide-react";
 
@@ -72,18 +71,40 @@ const CalculatorSection = ({
                 </div>
               </div>
               
-              <div className="space-y-2">
+              <div className="space-y-3">
                 <Label className="text-cheerpoint-navy font-semibold">Distancia total</Label>
-                <Select value={distance} onValueChange={setDistance}>
-                  <SelectTrigger className="border-cheerpoint-gray focus:border-cheerpoint-lime">
-                    <SelectValue placeholder="Selecciona la distancia" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="21">21K (Media Maratón)</SelectItem>
-                    <SelectItem value="42">42K (Maratón)</SelectItem>
-                    <SelectItem value="custom">Personalizada</SelectItem>
-                  </SelectContent>
-                </Select>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                  <Button
+                    variant={distance === "21" ? "default" : "outline"}
+                    onClick={() => setDistance("21")}
+                    className={distance === "21" 
+                      ? "bg-cheerpoint-lime text-cheerpoint-navy hover:bg-cheerpoint-lime/90" 
+                      : "text-cheerpoint-navy border-cheerpoint-gray hover:bg-cheerpoint-lime/10"
+                    }
+                  >
+                    21K (Media Maratón)
+                  </Button>
+                  <Button
+                    variant={distance === "42" ? "default" : "outline"}
+                    onClick={() => setDistance("42")}
+                    className={distance === "42" 
+                      ? "bg-cheerpoint-lime text-cheerpoint-navy hover:bg-cheerpoint-lime/90" 
+                      : "text-cheerpoint-navy border-cheerpoint-gray hover:bg-cheerpoint-lime/10"
+                    }
+                  >
+                    42K (Maratón)
+                  </Button>
+                  <Button
+                    variant={distance === "custom" ? "default" : "outline"}
+                    onClick={() => setDistance("custom")}
+                    className={distance === "custom" 
+                      ? "bg-cheerpoint-lime text-cheerpoint-navy hover:bg-cheerpoint-lime/90" 
+                      : "text-cheerpoint-navy border-cheerpoint-gray hover:bg-cheerpoint-lime/10"
+                    }
+                  >
+                    Personalizada
+                  </Button>
+                </div>
               </div>
 
               {distance === "custom" && (
