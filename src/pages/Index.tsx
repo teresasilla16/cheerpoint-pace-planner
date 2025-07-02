@@ -83,7 +83,7 @@ const Index = () => {
     }, 100);
   };
 
-  const handleDownloadPDF = () => {
+  const handleDownloadPDF = async () => {
     if (!email || !firstName || !lastName || !raceName || !participationType) {
       toast({
         title: "Error",
@@ -93,14 +93,45 @@ const Index = () => {
       return;
     }
 
-    toast({
-      title: "¡Perfecto!",
-      description: "Revisa tu bandeja de entrada para descargar tu plan de paso.",
-    });
+    try {
+      const response = await fetch('https://hook.eu2.make.com/dfvd6bkw8httboxi2cw4nh3upxf638fv', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          firstName,
+          lastName,
+          raceName,
+          participationType,
+          calculations,
+          startTime,
+          pace,
+          distance: distance === "custom" ? customDistance : distance
+        }),
+      });
 
-    setTimeout(() => {
-      document.getElementById('thanks')?.scrollIntoView({ behavior: 'smooth' });
-    }, 1000);
+      if (response.ok) {
+        toast({
+          title: "¡Perfecto!",
+          description: "Revisa tu bandeja de entrada para descargar tu plan de paso.",
+        });
+
+        setTimeout(() => {
+          document.getElementById('thanks')?.scrollIntoView({ behavior: 'smooth' });
+        }, 1000);
+      } else {
+        throw new Error('Error al enviar los datos');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      toast({
+        title: "Error",
+        description: "Hubo un problema al enviar los datos. Por favor intenta de nuevo.",
+        variant: "destructive",
+      });
+    }
   };
 
   const shareOnSocial = (platform: string) => {
