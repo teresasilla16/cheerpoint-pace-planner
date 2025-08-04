@@ -15,7 +15,7 @@ const HeroSection = ({ onScrollToCalculator }: HeroSectionProps) => {
           <img 
             src="/lovable-uploads/b7b75b2d-cfd9-4ae5-bc81-dc6c3de9e57c.png" 
             alt="Cheerpoint" 
-            className="mx-auto h-16 md:h-20 object-contain"
+            className="mx-auto w-[300px] object-contain"
           />
         </div>
         <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
