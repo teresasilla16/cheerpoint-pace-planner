@@ -22,8 +22,8 @@ const Index = () => {
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [raceName, setRaceName] = useState("");
   const [participationType, setParticipationType] = useState("");
+  const [city, setCity] = useState("");
 
   const scrollToCalculator = () => {
     document.getElementById('calculator')?.scrollIntoView({ behavior: 'smooth' });
@@ -84,7 +84,7 @@ const Index = () => {
   };
 
   const handleDownloadPDF = async () => {
-    if (!email || !firstName || !lastName || !raceName || !participationType) {
+    if (!email || !firstName || !lastName || !participationType) {
       toast({
         title: "Error",
         description: "Por favor completa todos los campos",
@@ -103,8 +103,8 @@ const Index = () => {
           email,
           firstName,
           lastName,
-          raceName,
           participationType,
+          city,
           calculations,
           startTime,
           pace,
@@ -168,6 +168,8 @@ const Index = () => {
         setDistance={setDistance}
         customDistance={customDistance}
         setCustomDistance={setCustomDistance}
+        city={city}
+        setCity={setCity}
         onCalculate={calculatePaces}
       />
 
@@ -186,8 +188,6 @@ const Index = () => {
         setFirstName={setFirstName}
         lastName={lastName}
         setLastName={setLastName}
-        raceName={raceName}
-        setRaceName={setRaceName}
         participationType={participationType}
         setParticipationType={setParticipationType}
         onDownloadPDF={handleDownloadPDF}

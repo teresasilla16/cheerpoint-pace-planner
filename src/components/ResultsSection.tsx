@@ -26,8 +26,8 @@ const ResultsSection = ({ calculations, showResults }: ResultsSectionProps) => {
           
           <Card className="shadow-xl border-0 animate-fade-in">
             <CardContent className="p-6">
-              <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                {calculations.map((calc) => (
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                {calculations.slice(0, 4).map((calc) => (
                   <div 
                     key={calc.km}
                     className="bg-cheerpoint-gray/30 rounded-lg p-4 text-center hover:bg-cheerpoint-lime/20 transition-colors duration-300"
@@ -37,6 +37,17 @@ const ResultsSection = ({ calculations, showResults }: ResultsSectionProps) => {
                   </div>
                 ))}
               </div>
+              
+              {calculations.length > 4 && (
+                <div className="text-center p-6 bg-cheerpoint-lime/10 rounded-lg border-2 border-dashed border-cheerpoint-lime/30">
+                  <p className="text-cheerpoint-navy font-semibold text-lg mb-2">
+                    ¿Quieres ver todos los tiempos de paso?
+                  </p>
+                  <p className="text-cheerpoint-navy/70">
+                    Completa el formulario y te enviamos el PDF completo a tu correo
+                  </p>
+                </div>
+              )}
             </CardContent>
           </Card>
         </div>

@@ -11,8 +11,12 @@ const HeroSection = ({ onScrollToCalculator }: HeroSectionProps) => {
     <section className="gradient-hero min-h-screen flex items-center justify-center relative overflow-hidden">
       <div className="absolute inset-0 bg-black/10"></div>
       <div className="container mx-auto px-4 text-center relative z-10 animate-fade-in">
-        <div className="text-cheerpoint-lime text-xl md:text-2xl font-bold mb-4">
-          Cheerpoint
+        <div className="mb-8">
+          <img 
+            src="/lovable-uploads/b7b75b2d-cfd9-4ae5-bc81-dc6c3de9e57c.png" 
+            alt="Cheerpoint" 
+            className="mx-auto h-16 md:h-20 object-contain"
+          />
         </div>
         <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
           ¿A qué hora pasarás

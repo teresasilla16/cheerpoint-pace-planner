@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Calculator, Clock } from "lucide-react";
 
@@ -14,6 +15,8 @@ interface CalculatorSectionProps {
   setDistance: (value: string) => void;
   customDistance: string;
   setCustomDistance: (value: string) => void;
+  city: string;
+  setCity: (value: string) => void;
   onCalculate: () => void;
 }
 
@@ -26,8 +29,20 @@ const CalculatorSection = ({
   setDistance,
   customDistance,
   setCustomDistance,
+  city,
+  setCity,
   onCalculate
 }: CalculatorSectionProps) => {
+  const spanishCities = [
+    "Madrid", "Barcelona", "Valencia", "Sevilla", "Zaragoza", "Málaga", "Murcia", "Palma",
+    "Las Palmas de Gran Canaria", "Bilbao", "Alicante", "Córdoba", "Valladolid", "Vigo",
+    "Gijón", "Eibar", "A Coruña", "Vitoria-Gasteiz", "Granada", "Elche", "Oviedo",
+    "Santa Cruz de Tenerife", "Badalona", "Cartagena", "Terrassa", "Jerez de la Frontera",
+    "Sabadell", "Móstoles", "Alcalá de Henares", "Pamplona", "Fuenlabrada", "Almería",
+    "San Sebastián", "Leganés", "Santander", "Castellón de la Plana", "Burgos", "Albacete",
+    "Getafe", "Salamanca", "Huelva", "Badajoz", "Logroño", "Tarragona", "Lleida",
+    "Marbella", "León", "Cádiz", "Dos Hermanas", "Mataró"
+  ];
   return (
     <section id="calculator" className="gradient-section py-20">
       <div className="container mx-auto px-4">
@@ -69,6 +84,22 @@ const CalculatorSection = ({
                     className="border-cheerpoint-gray focus:border-cheerpoint-lime"
                   />
                 </div>
+              </div>
+
+              <div className="space-y-2">
+                <Label className="text-cheerpoint-navy font-semibold">¿Dónde corres?</Label>
+                <Select value={city} onValueChange={setCity}>
+                  <SelectTrigger className="border-cheerpoint-gray focus:border-cheerpoint-lime">
+                    <SelectValue placeholder="Selecciona tu ciudad" />
+                  </SelectTrigger>
+                  <SelectContent className="max-h-60">
+                    {spanishCities.map((cityName) => (
+                      <SelectItem key={cityName} value={cityName}>
+                        {cityName}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
               
               <div className="space-y-3">

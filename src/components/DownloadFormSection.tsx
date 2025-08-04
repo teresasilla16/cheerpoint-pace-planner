@@ -14,8 +14,6 @@ interface DownloadFormSectionProps {
   setFirstName: (value: string) => void;
   lastName: string;
   setLastName: (value: string) => void;
-  raceName: string;
-  setRaceName: (value: string) => void;
   participationType: string;
   setParticipationType: (value: string) => void;
   onDownloadPDF: () => void;
@@ -29,8 +27,6 @@ const DownloadFormSection = ({
   setFirstName,
   lastName,
   setLastName,
-  raceName,
-  setRaceName,
   participationType,
   setParticipationType,
   onDownloadPDF
@@ -95,19 +91,6 @@ const DownloadFormSection = ({
                 />
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="raceName" className="text-cheerpoint-navy font-semibold">
-                  Carrera a la que asistes
-                </Label>
-                <Input
-                  id="raceName"
-                  type="text"
-                  placeholder="Nombre de la carrera"
-                  value={raceName}
-                  onChange={(e) => setRaceName(e.target.value)}
-                  className="border-cheerpoint-gray focus:border-cheerpoint-lime"
-                />
-              </div>
               
               <div className="space-y-2">
                 <Label className="text-cheerpoint-navy font-semibold">¿Vas a correr o animar?</Label>
