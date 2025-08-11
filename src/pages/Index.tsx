@@ -72,48 +72,79 @@ const Index = () => {
       results.push({
         km,
         time: timeString
-      });
+     const handleDownloadPDF = async () => {
+  if (!email || !firstName || !lastName || !participationType) {
+    toast({
+      title: "Error",
+      description: "Por favor completa todos los campos",
+      variant: "destructive",
+    });
+    return;
+  }
+
+  try {
+    // 1. GUARDAR EN SUPABASE PRIMERO
+    const { error: supabaseError } = await supabase
+      .from('calculations')
+      .insert([{
+        race_id: 1, // Medio Maratón de València por defecto
+        pace: pace,
+        start_time: startTime,
+        user_email: email,
+        user_type: participationType === 'runner' ? 'corredor' : 'animador',
+        first_name: firstName,
+        last_name: lastName,
+        city: city,
+        distance: distance === "custom" ? customDistance : distance
+      }]);
+
+    if (supabaseError) {
+      console.error('Error guardando en Supabase:', supabaseError);
+      // Continúa con el proceso aunque falle Supabase
+    } else {
+      console.log('Datos guardados en Supabase correctamente');
     }
 
-    setCalculations(results);
-    setShowResults(true);
-    
-    setTimeout(() => {
-      document.getElementById('results')?.scrollIntoView({ behavior: 'smooth' });
-    }, 100);
-  };
+    // 2. ENVIAR A MAKE.COM (como antes)
+    const response = await fetch('https://hook.eu2.make.com/dfvd6bkw8httboxi2cw4nh3upxf638fv', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email,
+        firstName,
+        lastName,
+        participationType,
+        city,
+        calculations,
+        startTime,
+        pace,
+        distance: distance === "custom" ? customDistance : distance
+      }),
+    });
 
-  const handleDownloadPDF = async () => {
-    if (!email || !firstName || !lastName || !participationType) {
+    if (response.ok) {
       toast({
-        title: "Error",
-        description: "Por favor completa todos los campos",
-        variant: "destructive",
+        title: "¡Perfecto!",
+        description: "Revisa tu bandeja de entrada para descargar tu plan de paso.",
       });
-      return;
+
+      setTimeout(() => {
+        document.getElementById('thanks')?.scrollIntoView({ behavior: 'smooth' });
+      }, 1000);
+    } else {
+      throw new Error('Error al enviar los datos');
     }
-
-    try {
-      const response = await fetch('https://hook.eu2.make.com/dfvd6bkw8httboxi2cw4nh3upxf638fv', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email,
-          firstName,
-          lastName,
-          participationType,
-          city,
-          calculations,
-          startTime,
-          pace,
-          distance: distance === "custom" ? customDistance : distance
-        }),
-      });
-
-      if (response.ok) {
-        toast({
+  } catch (error) {
+    console.error('Error:', error);
+    toast({
+      title: "Error",
+      description: "Hubo un problema al enviar los datos. Por favor intenta de nuevo.",
+      variant: "destructive",
+    });
+  }
+};
           title: "¡Perfecto!",
           description: "Revisa tu bandeja de entrada para descargar tu plan de paso.",
         });
